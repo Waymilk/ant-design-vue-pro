@@ -19,6 +19,7 @@
 
 <script>
 import SubMenu from './SubMenu' 
+import {check} from '../utils/auth'
 export default {
   props:{
     theme:{
@@ -58,9 +59,11 @@ export default {
     },
     getMenuData(routes = [],parentKeys = [],selectedKey){
       const menuData = [];
-      routes.forEach(item => {
+      for (const item of routes) {
+        if (item.meta && item.meta.authority && !check(item.meta.authority)) {
+          break;
+        }
         if (item.name && !item.hideInMenu) {
-          console.log(item,11)
           this.openKeysMap[item.path] = parentKeys
           this.selectedKeysMap[item.path] = [selectedKey || item.path]
           const newItem = {...item};
@@ -74,7 +77,7 @@ export default {
         }else if (!item.hideInMenu && !item.hideInChildrenMenu && item.children) {
           menuData.push(...this.getMenuData(item.children,[...parentKeys,item.path]))
         }
-      });
+      }
       return menuData
     }
   },
