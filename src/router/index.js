@@ -66,28 +66,28 @@ Vue.use(VueRouter)
           },
           {
             path: '/form/step-form',
-            name: 'StepForm',
+            name: 'stepForm',
             meta:{title:'分步表单'},
             hideInChildrenMenu:true,
             component: () => import(/* webpackChunkName: "form" */  '../views/Forms/stepForm'),
             children:[
               {
-                path:'form/step-form',
-                redirect:'form/step-form/info'
+                path:'/form/step-form',
+                redirect:'/form/step-form/info'
               },
               {
-                path:'form/step-form/info',
-                redirect:'info',
+                path:'/form/step-form/info',
+                name:'info',
                 component: () => import(/* webpackChunkName: "form" */  '../views/Forms/stepForm/step1'),
               },
               {
-                path:'form/step-form/confirm',
-                redirect:'confirm',
+                path:'/form/step-form/confirm',
+                name:'confirm',
                 component: () => import(/* webpackChunkName: "form" */  '../views/Forms/stepForm/step2'),
               },
               {
-                path:'form/step-form/result',
-                redirect:'result',
+                path:'/form/step-form/result',
+                name:'result',
                 component: () => import(/* webpackChunkName: "form" */  '../views/Forms/stepForm/step3'),
               },
             ]
